@@ -393,18 +393,17 @@ h3.sub{font-size:20px;margin:36px 0 12px}
   <p class="note" style="margin-top:14px">Region centres approximate, from published polar maps; Artemis III lists: NASA, Aug 2022 (13 regions) and Oct 2024 (9). Mission 4 parameters from ispace’s public material; the public documents name the south polar region, and the 87°S figure is the programme’s stated working value, drawn here as given. Connecting Ridge remains the working base site of this series; de Gerlache Rim 2 is carried as the scored alternative.</p>
 </section>
 
-<!-- ============ 03 · THE FOUR PIECES ============ -->
+<!-- ============ 03 · THE THREE PIECES ============ -->
 <section class="sec wrap" id="pieces">
   <div class="head">
     <p class="eyebrow">03 · From the plan to physics</p>
-    <h2>Four pieces turn the job list into a physical build</h2>
-    <p class="lead">Report 04’s plans were kinematic: every block had a pose, a station and a time, but nothing pushed back. Report 05 adds the physics and the robot middleware: every construction sequence is replayed block by block in Isaac Sim (PhysX 6.1) under the Moon’s surface conditions — 1.62 m/s² gravity and dry block-on-block contact — on an RTX laptop, with a lightweight pybullet script as the quick pre-check during development.</p>
+    <h2>Three pieces turn the job list into a physical build</h2>
+    <p class="lead">Report 04’s plans were kinematic: every block had a pose, a station and a time, but nothing pushed back. Report 05 adds the physics: every construction sequence is replayed block by block in Isaac Sim (PhysX 6.1) under the Moon’s surface conditions — 1.62 m/s² gravity and dry block-on-block contact — on an RTX laptop, with a lightweight pybullet script as the quick pre-check during development.</p>
   </div>
   <div class="grid3">
     <div><b>4D BIM export</b><p>Every block an IfcBuildingElementPart with mesh, mass and status (planned / set / measured); every job an IfcTask with start, finish and the Dragon as resource. IFC 4, zero schema errors, geometry identical to the plan (0.000 mm); opens in any IFC viewer, plays in Bonsai.</p></div>
     <div><b>Stage stability check</b><p>The dome and pad built block by block, stage by stage: after every placement the whole structure settles and every drift is recorded — 283 stages for the pad, 216 for the dome. A pybullet script version of the same check runs as the quick pre-check while iterating.</p></div>
     <div><b>Isaac Sim stage check</b><p>The sequence run in PhysX (Isaac Sim 6.1): the findings quoted in this report come from these runs. About 10 min of physics per pad run, 7 min per dome run.</p></div>
-    <div><b>ROS 2 timeline player</b><p>An ament_python package that plays a Report 04 plan as ROS 2 messages: arm and spine targets into the Motion Stack, base velocity, gripper state, current job. 16 offline tests pass on the real plans.</p></div>
   </div>
 </section>
 
@@ -657,12 +656,13 @@ h3.sub{font-size:20px;margin:36px 0 12px}
   <div class="head">
     <p class="eyebrow">10 · Next steps</p>
     <h2>Two harder cases, and the numbers still open</h2>
-    <p class="lead">Prof. Yoshida set two demonstration cases that reuse the whole pipeline. The solar power plant goes first — simpler blocks, more driving, a clear story for a keynote — then the complex dome once the staple result is confirmed in Isaac Sim.</p>
+    <p class="lead">Prof. Yoshida proposed two demonstration cases that use the whole pipeline: a solar power plant and a complex dome. This report takes the first step on both, with the three power-plant column options and the stapled dome with its door. Next, the plant grows from one column to a field of columns on paved footings, and the complex dome follows once the staple result is confirmed in Isaac Sim.</p>
   </div>
   <div class="grid3">
     <div><b>Solar power plant</b><p>Mast footings as square interlock pads with a central socket, a trench liner over the power cable, pavers and berm, then the mast and panels docked as plug-ins. Tests many small structures across the site and plug-in tolerance at the socket.</p></div>
     <div><b>Complex dome</b><p>A free-form shell from the same block family, with a framed doorway and a span the robot builds from inside: courses of changing tilt, temporary support, the door frame — everything this report established, on a harder shape.</p></div>
     <div><b>Isaac Sim confirmations</b><p>The dome PhysX runs finishing; the graded-block COM_OUT runs; the stapled build with breakable fixed joints; the door cut through the closed shell; the stage-stability check on the chosen column option.</p></div>
+    <div><b>ROS 2 link to the real robot</b><p>A ROS 2 player that turns the build plan into Motion Stack commands for the MoonBot (joint targets per limb, base velocity, gripper, current job) is drafted. Next: run it with Isaac Sim, then on the robot. The build films in this report are replayed straight from the plan, without ROS.</p></div>
     <div><b>Design questions</b><p>The staple’s required rating (being measured) and the slot detail on the block; whether support posts, if used, become permanent ribs; the door frame’s final shape; the Dragon’s real joint speed limits.</p></div>
   </div>
 </section>
